@@ -13,10 +13,13 @@ function DigitalClock() {
   }, []);
 
   const formatTime = (date) => {
-    const hours = date.getHours().toString().padStart(2, '0');
+    let hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, '0');
     const seconds = date.getSeconds().toString().padStart(2, '0');
-    return `${hours}:${minutes}:${seconds}`;
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours.toString().padStart(2, '0') : '12'; // the hour '0' should be '12'
+    return `${hours}:${minutes}:${seconds} ${ampm}`;
   };
 
   return (
@@ -28,4 +31,3 @@ function DigitalClock() {
 }
 
 export default DigitalClock;
-
